@@ -1,0 +1,17 @@
+<article>
+                
+    <div id="loginBox"> 
+        
+        <form class="login_form" ng-submit="login()">
+            <label for="username">Username:</label>
+            <input type="text" autocomplete="off" id="username" ng-model="username">
+            <label for="password"> Password:</label>
+            <input type="password" autocomplete="off" id="password" ng-model="password"> 
+            <div id="lower">
+                <p class="error" ng-if="err">{{errMes}}</p>
+                <button class="btn btn-default" type="submit">Login</button>
+            </div> 
+        </form>
+
+    </div>
+</article>

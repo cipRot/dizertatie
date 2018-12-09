@@ -1,0 +1,4 @@
+#Redirect Application from 10.4.1.241 to 193.226.136.22
+#RewriteEngine On
+#RewriteCond %{HTTP_HOST} ^10.4.1.241$
+#RewriteRule ^$ http://localhost/cheatingText [L,R=301]

@@ -1,0 +1,78 @@
+<div ng-include src="'frontend/templates/tpl/header.html'" ng-controller="HeaderController"></div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit <span class="bold">{{group}}</span>:</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+            <div class="custom_list left">
+                <h4 ng-if="showHeadings" class="text-center">Roles left {{remaningRoles2.length | uppercase }}</h4>
+                <ul>
+                    <li ng-repeat="remRoles in remaningRoles2 track by $index">
+                        {{remRoles.name}} 
+                        <button ng-click="add(remRoles)">
+                            <!-- <span aria-hidden="true" class="icon-arrow-down"></span> -->
+                            Add role
+                        </button>
+                    </li>
+                    <li ng-if="remaningRoles2.length == 0">All roles used!</li>
+                </ul>  
+            </div>
+            <br/>
+            <div class="custom_list right">
+                <h4 ng-if="showHeadings" class="text-center">
+                    Current roles on 
+                    <span class="bold">{{selectedGroupName}}</span> 
+                    <span ng-if="selectedRoles[0].role_name">({{selectedRoles.length }})</span>
+                    <span ng-if="!selectedRoles[0].role_name">(0)</span>
+                </h4> 
+                <ul>
+                    <li ng-repeat="selRoles in selectedRoles track by $index" ng-show="selRoles.id_role">
+                        {{selRoles.role_name}}
+                        <button ng-click="remove(selRoles)">
+                            <!-- <span aria-hidden="true" class="icon-arrow-up"></span> -->
+                            Remove role    
+                        </button>
+                    </li>
+                    <li ng-if="(selectedRoles.length == 1 && !selectedRoles[0].role_name) || (selectedRoles.length == 0)">No roles added!</li>
+                </ul> 
+            </div>    
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="save()" ng-if="showSaveBtn" >Submit changes</button> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div class="container"> 
+    <div class="row"> 
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-shuffle"></i> Set Group - Roles relationship 
+                    </div> 
+                </div>
+                <div style="display: inline-block;width: 100%">
+                    <div  ng-repeat="out in output track by $index" class="wrp_sec" ng-if="out" ng-click="enter(out)">
+                        <div class="mt-element-ribbon bg-grey-steel">
+                            <div class="ribbon ribbon-color-default uppercase">{{out[0].group_name}}</div>
+                            <p class="ribbon-content" ng-if="out[0].role_name">{{out.length }} roles</p>
+                            <p class="ribbon-content" ng-if="!out[0].role_name">No roles</p>
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+        </div> 
+    </div>     
+
+                 
+</div>

@@ -1,0 +1,55 @@
+<!-- BEGIN HEADER TOP -->
+<div class="page-header-top" >
+    <nav class="navbar"> 
+        <div class="navbar-header">
+            <a href="#/dashboard">
+                <img src="frontend\assets\layouts\layout3\img\tga_inv.png" alt="logo" class="logo-default">
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="#/dashboard">
+                    <i class="icon-screen-desktop"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li><a href="#/history"><i class="icon-note"></i>History</a></li>
+            <li><a href="#/sla"><i class="icon-note"></i>SLA</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-settings"></i>
+                    Admin
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/admin/users"><i class="icon-users"></i>Users</a></li>
+                    <li><a href="#/admin/accounts"><i class="icon-folder"></i>Accounts</a></li>
+                    <li><a href="#/admin/groups"><i class="icon-grid"></i>Groups</a></li>
+                    <li><a href="#/admin/roles"><i class="icon-layers"></i>Roles</a></li>
+                </ul>
+            </li>
+        </ul> 
+    </nav>
+    
+    <div class="top-menu pull-right" id="not-head">
+        <ul class="nav navbar-nav pull-right">
+            <li class="dropdown dropdown-user dropdown-dark last-dropdown">
+                <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                    <img alt="" class="img-circle"  src="frontend/assets/layouts/layout3/img/no_profile.png">
+                    <span class="username username-hide-mobile">{{username}}<i class="fa fa-angle-down"></i></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-default option-menu">
+                    <li>
+                        <a href="#/profile">
+                            <i class="icon-user"></i>Profile
+                        </a>
+                    </li>
+                    <li class="last-item">
+                        <a ng-click="logout()">
+                            <i class="icon-key"></i>Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

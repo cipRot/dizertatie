@@ -1,0 +1,196 @@
+<div ng-include src="'frontend/templates/tpl/header.html'" ng-controller="HeaderController"></div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Project details:</h4> 
+      </div>
+      <div class="modal-body">
+        <form id="form" class="portlet-body form">
+            <div class="form-horizontal" role="form">
+                <div class="form-body">   
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Project name:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="name" ng-model="name"> 
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Add country to Project:</label>
+                        <div class="col-md-9">
+                            <div class="checkbox-list">
+                                <label ng-repeat="country1 in countries track by $index">
+                                    <div class="checker">
+                                        <span class="">
+                                            <input type="checkbox" cnt_name="{{country1.name}}" ng-value="country1.id" ckrpr>
+                                        </span>
+                                    </div> 
+                                    {{country1.name}} 
+                                </label> 
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+            type="button" 
+            class="btn btn-default" 
+            ng-click="saveChanges(name,countryList)">
+            Save changes
+        </button> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit project:</h4> 
+      </div>
+      <div class="modal-body">
+        <form id="form2" class="portlet-body form">
+            <div class="form-horizontal" role="form">
+                <div class="form-body">   
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Project name:</label>
+                        <div class="col-md-9"> 
+                            <select class="form-control" ng-model="defaultPR" id="pro" name="pro" ng-change="changePro(defaultPR)">
+                                <option value="">Select an option</option>
+                                <option ng-repeat="project1 in pro track by $index" ng-value="project1.id">{{project1.name}}</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Rename project :</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="edit_name" ng-model="edit_name" ng-disabled="edit_c_name"> 
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Add country to Project:</label>
+                        <div class="col-md-9">
+                            <div class="checkbox-list">
+                                <label ng-repeat="country2 in countries track by $index">
+                                    <div class="checker">
+                                        <span class="">
+                                            <input type="checkbox" id="{{country2.name.replace(' ', '')}}" cnt_name="{{country2.name.replace(' ', '')}}" ng-value="country2.id" disabled ckrpr2>
+                                        </span>
+                                    </div> 
+                                    {{country2.name}} 
+                                </label> 
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+            type="button" 
+            class="btn btn-default" 
+            ng-click="saveEditChanges(edit_name, defaultPR, editCountryList)">
+            Save changes
+        </button> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div id="myModal3" class="modal fade" role="dialog">
+  <div class="modal-dialog"> 
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete project:</h4> 
+      </div>
+      <div class="modal-body">
+        <form id="form3" class="portlet-body form">
+            <div class="form-horizontal" role="form">
+                <div class="form-body">   
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Project:</label>
+                        <div class="col-md-9"> 
+                            <select class="form-control" ng-model="deleteProject" id="deleteProject" ng-change="deletePr(deleteProject)">
+                                <option value="">Select an option</option>
+                                <option ng-repeat="project2 in projs track by $index" ng-value="project2.id">{{project2.name}}</option>
+                            </select>
+                        </div>
+                    </div>  
+                </div> 
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+            type="button" 
+            class="btn btn-default" 
+            ng-click="submitDelete(deleteProject)">
+            Delete
+        </button> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div class="container"> 
+    <div class="row"> 
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-briefcase"></i> Admin - Projects
+                    </div> 
+
+                    <button type="button" class="btn btn-default pull-right" ng-click="modal_open()">
+                        Add new project
+                    </button>
+
+                    <button type="button" class="btn btn-default pull-right" ng-click="modal_open2()"  style="margin-right: 10px">
+                        Edit project
+                    </button>
+
+                    <button type="button" class="btn btn-default pull-right" ng-click="modal_open3()"  style="margin-right: 10px">
+                        Remove project
+                    </button> 
+                </div>
+                <div class="portlet-body"> 
+                    <table class="table table-bordered" id="users">
+                        <thead> 
+                          <tr>
+                            <th style="width: 5%">ID</th> 
+                            <th style="width: 35%">Project Name</th>
+                            <th style="width: 35%">Country joined</th> 
+                            <th style="width: 25%">Actions</th> 
+                         </tr>    
+                        </thead> 
+                        <tbody>
+                            <tr ng-repeat="project3 in projects track by $index">
+                                <td>{{project3.id}}</td>
+                                <td>{{project3.projectName}}</td>
+                                <td>{{project3.countryName}}</td>
+                                <td><button class="btn btn-default" ng-click="remove(project3.id)" style="width: 100%">Remove connection</button></td>
+                            </tr>
+                        </tbody>
+                   </table> 
+
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+    
+</div>
