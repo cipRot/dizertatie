@@ -203,11 +203,11 @@ comparison_api.config(['$stateProvider', '$urlRouterProvider', function($statePr
             }
         })
 
-        .state('history', {
-            url: "/history",
-            templateUrl: "frontend/templates/history/history.html" ,
-            data: {pageTitle: 'History page'},
-            controller: "HistoryController",
+        .state('library', {
+            url: "/library",
+            templateUrl: "frontend/templates/library/library.html" ,
+            data: {pageTitle: 'Library page'},
+            controller: "LibraryController",
             authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -215,7 +215,7 @@ comparison_api.config(['$stateProvider', '$urlRouterProvider', function($statePr
                         name: 'comparison_api',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'frontend/scripts/controllers/history/HistoryController.js' 
+                            'frontend/scripts/controllers/library/LibraryController.js' 
                         ]
                     });
                 }]
@@ -239,141 +239,7 @@ comparison_api.config(['$stateProvider', '$urlRouterProvider', function($statePr
                     });
                 }]
             }
-        })
-
-
-        .state('admin/users', {
-            url: "/admin/users",
-            templateUrl: "frontend/templates/admin/users.html" ,
-            data: {pageTitle: 'Admin - User page'},
-            controller: "UsersController",
-            authenticate: true,
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'comparison_api',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'frontend/scripts/controllers/admin/UsersController.js' 
-                        ]
-                    });
-                }]
-            }
-        })
-
-        .state('admin/accounts', {
-            url: "/admin/accounts",
-            templateUrl: "frontend/templates/admin/accounts.html" ,
-            data: {pageTitle: 'Admin - ACC page'},
-            controller: "AccountsController",
-            authenticate: true,
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'comparison_api',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'frontend/scripts/controllers/admin/AccountsController.js' 
-                        ]
-                    });
-                }]
-            }
-        })
-
-        .state('admin/groups', {
-            url: "/admin/groups",
-            templateUrl: "frontend/templates/admin/groups.html" ,
-            data: {pageTitle: 'Admin - Groups page'},
-            controller: "GroupsController",
-            authenticate: true,
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'comparison_api',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'frontend/scripts/controllers/admin/GroupsController.js' 
-                        ]
-                    });
-                }]
-            }
-        })
-
-        .state('admin/roles', {
-            url: "/admin/roles",
-            templateUrl: "frontend/templates/admin/roles.html" ,
-            data: {pageTitle: 'Admin - Roles page'},
-            controller: "RolesController",
-            authenticate: true,
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'comparison_api',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'frontend/scripts/controllers/admin/RolesController.js' 
-                        ]
-                    });
-                }]
-            }
-        })
-
-        .state('admin/roles/set', {
-            url: "/admin/roles/set",
-            templateUrl: "frontend/templates/admin/setroles.html" ,
-            data: {pageTitle: 'Admin - Set roles page'},
-            controller: "SETrolesController",
-            authenticate: true,
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'comparison_api',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'frontend/scripts/controllers/admin/SETrolesController.js' 
-                        ]
-                    });
-                }]
-            }
-        })
-
-        .state('admin/country', {
-            url: "/admin/country",
-            templateUrl: "frontend/templates/admin/country.html" ,
-            data: {pageTitle: 'Admin - Countries page'},
-            controller: "CountryController",
-            authenticate: true,
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'comparison_api',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'frontend/scripts/controllers/admin/CountryController.js' 
-                        ]
-                    });
-                }]
-            }
-        })
-
-        .state('admin/project', {
-            url: "/admin/project",
-            templateUrl: "frontend/templates/admin/project.html" ,
-            data: {pageTitle: 'Admin - Project page'},
-            controller: "ProjectController",
-            authenticate: true,
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'comparison_api',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            'frontend/scripts/controllers/admin/ProjectController.js' 
-                        ]
-                    });
-                }]
-            }
-        })
+        }) 
  
         // $urlRouterProvider.otherwise( function($injector, $location){
         //     var $state = $injector.get('$state');

@@ -1,0 +1,62 @@
+<div ng-include src="'frontend/templates/tpl/header.html'" ng-controller="HeaderController"></div>
+
+<div class="container dashboard"> 
+    <div class="row">  
+        <div>
+			<div class="portlet light">
+				<div class="portlet-title">
+			        <div class="caption">
+			            <i class="fa fa-tablet" aria-hidden="true"></i> 
+			            Library
+			        </div> 
+			    </div>
+			    <div class="portlet-body"> 
+			    	<div class="form-wrapper login-page"> 
+						<div> 
+							<div id="actions-wrp"> 
+								<div>
+									<h3>Upload File</h3>
+									<div class="input-group">
+						                <label class="input-group-btn">
+						                    <span class="btn btn-primary">
+						                        Browse&hellip; <input type = "file" file-model = "myFileUpload" style="display: none;" multiple>
+						                    </span>
+						                </label>
+						                <input type="text" class="form-control" readonly>
+						            </div> 
+					        		
+								</div>
+								<div>
+									<button class="btn btn-block btn-default" ng-click = "uploadFile()">Add file to library</button>
+								</div>
+					    	</div>
+					        
+						</div>  
+					</div> 
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container dashboard"> 
+    <div class="row">  
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-paper-plane font-yellow-casablanca"></i> 
+                        All files {{getAllDocuments.length}}
+                    </div> 
+                </div>
+                <div class="portlet-body">
+                     <ul>
+                     	<li ng-repeat="doc in getAllDocuments">{{doc.title}} </li>
+                     </ul>
+                </div> 
+            </div>
+        </div> 
+    </div> 
+</div> 
+
+ 

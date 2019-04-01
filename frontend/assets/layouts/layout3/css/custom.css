@@ -1,10 +1,29 @@
- 
+.container.dashboard{
+    width: 95%!important
+} 
 .input-group-addon>i{
     color: #555;
 }
-.dashboard .portlet.light .portlet-body{
-    padding-top: 8px;
-    margin: 0 0 15px 25px;
+.file-list {
+    margin: 0;
+    padding: 0;
+}
+
+.file-list li.first{
+    background: #D4B76A
+}   
+
+.file-list li.second{
+    background: #73B55B
+}   
+ 
+.file-list li{
+    list-style: none;
+    padding: 5px;
+    background: grey;
+    margin: 0 0 5px;
+    color: #fff;
+    cursor: pointer;
 }
 .custom_list {
     width: 100%;
@@ -346,7 +365,7 @@ iframe {
     display: block;       /* iframes are inline by default */
     background: #000;
     border: none;         /* Reset default border */
-    height: 500px;        /* Viewport-relative units */
+    height: 700px;        /* Viewport-relative units */
     width: 100%;
 }
 

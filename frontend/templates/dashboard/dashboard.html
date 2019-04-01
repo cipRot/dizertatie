@@ -1,19 +1,32 @@
 <div ng-include src="'frontend/templates/tpl/header.html'" ng-controller="HeaderController"></div>
 
 <div class="container dashboard"> 
-    <div class="row">  
-        <div>
+    <div class="row">    
+        <div class="col-md-8">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-paper-plane font-yellow-casablanca"></i> 
+                        Comparison API 
+                    </div> 
+                </div>
+                <div class="portlet-body"> 
+                   <iframe id="frame" src="" frameborder="0" allowfullscreen></iframe>
+                </div> 
+            </div>
+        </div> 
+
+        <div class="col-md-4">
 			<div class="portlet light">
 				<div class="portlet-title">
 			        <div class="caption">
 			            <i class="icon-paper-plane font-yellow-casablanca"></i> 
-			            Comparison API 
+			            Compare custom files
 			        </div> 
 			    </div>
 			    <div class="portlet-body"> 
 			    	<div class="form-wrapper login-page"> 
-						<div>
-							<h1>Text detector v2</h1>
+						<div> 
 							<div id="actions-wrp">
 								<div>
 									<!-- <input type = "file" file-model = "myFile"/> -->  
@@ -49,112 +62,22 @@
 					</div> 
 			    </div>
 			</div>
-		</div>
-	</div>
-</div>
-
-<div class="container dashboard"> 
-    <div class="row">  
-        <div class="col-md-12">
+	 
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-paper-plane font-yellow-casablanca"></i> 
-                        Comparison API
-                        
-                    </div>
-                    <!-- <button type="button" class="btn default pull-right" ng-click="modal_open()" ng-disabled="disable_add_btns">
-                        <img src="frontend\assets\layouts\layout3\img\add.png"> Add email log
-                    </button> -->
+                        All files ( {{getAllDocuments.length}} )
+                    </div> 
                 </div>
                 <div class="portlet-body">
-                    <button class="btn" ng-click="test()">TEST</button>
-                   <iframe id="frame" src="" frameborder="0" allowfullscreen></iframe>
+                     <ul class="file-list">
+                     	<li ng-repeat="doc in getAllDocuments" ckrpr >{{doc.title}} </li>
+                     </ul>
+                     <button class="btn btn-block hide" id="cc" ng-click="compareLocal()">Compare</button>
                 </div> 
             </div>
         </div> 
-    </div> 
-</div> 
-
-
-
-<div class="container dashboard"> 
-    <div class="row">  
-        <div>
-			<div class="portlet light">
-				<div class="portlet-title">
-			        <div class="caption">
-			            <i class="icon-paper-plane font-yellow-casablanca"></i> 
-			            Comparison API
-			            
-			        </div>
-			        <!-- <button type="button" class="btn default pull-right" ng-click="modal_open()" ng-disabled="disable_add_btns">
-			            <img src="frontend\assets\layouts\layout3\img\add.png"> Add email log
-			        </button> -->
-			    </div>
-			    <div class="portlet-body"> 
-			    	<div class="form-wrapper login-page"> 
-						<div  style="margin-bottom: 20px">
-							<h1>Text detector v0.1</h1>
-							<div id="actions-wrp">
-								<div style="margin-bottom: 20px">
-									<!-- <input type = "file" file-model = "myFile"/> -->  
-									<h3>Read PDF</h3>
-									<div class="input-group">
-						                <label class="input-group-btn">
-						                    <span class="btn btn-primary">
-						                        Browse&hellip; <input type = "file" file-model = "myFile" style="display: none;" multiple>
-						                    </span>
-						                </label>
-						                <input type="text" class="form-control" readonly>
-						            </div>
-						            <button class="btn btn-block btn-default" ng-click = "uploadFile('read')">Read File</button>
-								</div>
-								
-								<div>
-									<h3>Upload PDF</h3>
-									<div class="input-group">
-						                <label class="input-group-btn">
-						                    <span class="btn btn-primary">
-						                        Browse&hellip; <input type = "file" file-model = "myFileUpload" style="display: none;" multiple>
-						                    </span>
-						                </label>
-						                <input type="text" class="form-control" readonly>
-						            </div>
-									<!-- <input type = "file" file-model = "myFileUpload"/> -->
-					        		<button class="btn btn-block btn-default" ng-click = "uploadFile('upload')">Upload File</button>
-								</div>
-					    	</div>
-					        <div class=" ">
-								<h3>Documents stored in DB</h3> 
-								<div id="div_two"> 
-								 	<ul class="document-list">
-								 		<li ng-repeat="doc in getAllDocuments track by $index" ng-click="compareDocuments(doc.content)">
-								 			<i class="fa fa-file-pdf-o" aria-hidden="true" style="margin-right: 5px"></i> {{doc.title}}
-								 		</li>
-								 	</ul>  
-								</div>
-							</div>
-						</div>  
-					</div>
-
-
-					<div id="dif-text"> 
-						<div class="hide">
-							<h3>Uploaded PDF sample</h3>
-							<div id="div_one" class="hide"></div> 
-						</div>
-						
-						<div>
-							<h3>Result</h3> 
-							<div class="bold">
-							 	Identic text is {{ res }} %
-							</div>
-					  		<div id="result" class="hide"></div>
-						</div>  
-					</div>
-			    </div>
-			</div>
-		</div>
-	</div>
+  
+ 	</div>
 </div>

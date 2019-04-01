@@ -5,7 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "@draftable/compare-api": "^1.1.0",
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.18.3",
     "connect-busboy": "0.0.2",
     "cors": "^2.8.4",
     "express": "^4.0.0",

@@ -74,53 +74,41 @@ comparison_api.directive('ckr',
         };
     });
 
-comparison_api.directive('ckr2',
-    function() {
-        return {
-            restrict: 'A',
-            link: function(scope, elem, attrs) {
-                 elem.click(function(){  
-                    elem.parent().toggleClass('checked'); 
-                    if(elem.parent().hasClass('checked')){
-                        scope.editProjectList[attrs.prjName] = attrs.value;
-                    } else { 
-                        delete scope.editProjectList[attrs.prjName] 
-                    }  
-                 })
-            }
-        };
-    });
+ 
+ 
+ 
 
 comparison_api.directive('ckrpr',
     function() {
         return {
             restrict: 'A',
-            link: function(scope, elem, attrs) {
+            link: function($scope, elem, attrs) {
                  elem.click(function(){  
-                    elem.parent().toggleClass('checked'); 
-                    if(elem.parent().hasClass('checked')){
-                        scope.countryList[attrs.cntName] = attrs.value;
-                    } else { 
-                        delete scope.countryList[attrs.cntName] 
-                    }  
-                 })
-            }
-        };
-    });
+                    elem.toggleClass('checked');   
 
-comparison_api.directive('ckrpr2',
-    function() {
-        return {
-            restrict: 'A',
-            link: function(scope, elem, attrs) {
-                 elem.click(function(){  
-                    elem.parent().toggleClass('checked'); 
-                    if(elem.parent().hasClass('checked')){
-                        scope.editCountryList[attrs.cntName] = attrs.value;
-                    } else { 
-                        delete scope.editCountryList[attrs.cntName] 
-                    }  
+                    if(elem.hasClass("first")) {
+                        elem.removeClass('first'); 
+                        $scope.obj.one = "";  
+                    } else if(elem.hasClass("second")) {
+                        elem.removeClass('second'); 
+                        $scope.obj.two = "";  
+                    } else {
+                        if($scope.obj.one === ""){
+                            $scope.obj.one = $scope.doc.title;
+                            elem.addClass('first'); 
+                        } else if ($scope.obj.two === ""){
+                            $scope.obj.two = $scope.doc.title;
+                            elem.addClass('second');
+                        }
+                    }
+
+                    if($scope.obj.one !== '' && $scope.obj.two !== ''){
+                        angular.element("#cc").removeClass("hide")
+                    } else {
+                        angular.element("#cc").addClass("hide")
+                    }
                  })
             }
         };
     });
+ 
