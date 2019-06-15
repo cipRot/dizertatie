@@ -110,18 +110,27 @@ comparison_api.controller('HeaderController', ['$scope', '$rootScope', '$http', 
                 }
             },
             callback: function (result) {
-                if (result == true){
-                    userFactory.logout().then(function(response){
-                        if(response.data.out == true){
-                            $location.path('/login');
-                            localStorage.clear();
-                        }else {
-                            bootbox.alert('Try again!');
-                        }
+                // if (result == true){
+                //     userFactory.logout().then(function(response){
+                //         if(response.data.out == true){
+                //             $location.path('/login');
+                //             localStorage.clear();
+                //         }else {
+                //             bootbox.alert('Try again!');
+                //         }
                         
-                    })
+                //     })
                      
-                }
+                // }
+
+                if (result == true){ 
+
+                    console.log(1)
+                    $location.path('/login');
+                    $scope.$apply();
+                     
+                    localStorage.clear();
+                } 
             }
         });
     } 
@@ -149,7 +158,7 @@ comparison_api.config(['$stateProvider', '$urlRouterProvider', function($statePr
         .state('login', {
             url: "/login",
             templateUrl: "frontend/templates/account/login.html" ,
-            data: {pageTitle: 'eMail Log'},
+            data: {pageTitle: ''},
             controller: "LoginController",
             authenticate: false,
             resolve: {
@@ -184,11 +193,11 @@ comparison_api.config(['$stateProvider', '$urlRouterProvider', function($statePr
             }
         })
 
-        .state('profile', {
-            url: "/profile",
-            templateUrl: "frontend/templates/account/profile.html" ,
-            data: {pageTitle: 'Profile page'},
-            controller: "ProfileController",
+        .state('create', {
+            url: "/create",
+            templateUrl: "frontend/templates/account/create.html" ,
+            data: {pageTitle: 'create page'},
+            controller: "CreateController",
             authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -196,7 +205,7 @@ comparison_api.config(['$stateProvider', '$urlRouterProvider', function($statePr
                         name: 'comparison_api',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'frontend/scripts/controllers/account/ProfileController.js' 
+                            'frontend/scripts/controllers/account/CreateController.js' 
                         ]
                     });
                 }]

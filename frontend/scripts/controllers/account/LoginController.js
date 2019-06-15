@@ -10,30 +10,34 @@ angular.module('comparison_api').controller('LoginController', function($rootSco
         if(angular.element(".login_form").valid()){
             var username = $scope.username;
             var password = $scope.password;  
-            var data ="username="+username+"&password="+password;  
+            var data ={
+                username , 
+                password 
+            };
          
             userFactory.login(data).success(function(data){ 
-                if (!data.error) { 
+                console.log(data)
+                if (data.msg !== "No user found!") {
+                console.log(data) 
                     $scope.err = false;
                     $scope.errMes = '';
-                    localStorage.active = data.active;
-                    localStorage.user_id = data.id;
-                    localStorage.username = data.username;
-                    localStorage.email = data.email; 
-                    var roles = data.roles; 
-                    roles.forEach(function(v, k){ 
-                        localStorage[v.name] = v.name;
-                    });  
-                    $rootScope.header_user = data.username;
+                    localStorage.active = true;
+                    localStorage.user_id = data.data._id;
+                    localStorage.username = data.data.username;
+                    localStorage.type = data.data.type;   
+                    $rootScope.header_user = data.data.username;
+                    $rootScope.header_user_type = data.data.type;
                    $location.path('/dashboard');
                 } else {   
                     $scope.err = true;
                     $scope.errMes = data.msg; 
+                    bootbox.alert(data.msg); 
                 } 
             })
         } else {
             $scope.err = true;
             $scope.errMes = 'Enter credentials!';
+            bootbox.alert('Enter credentials!');
         }
     	
 	}

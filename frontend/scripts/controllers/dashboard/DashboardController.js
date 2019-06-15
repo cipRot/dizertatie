@@ -5,7 +5,7 @@ angular.module('comparison_api').controller('DashboardController', function($roo
     }); 
 
     
-
+    console.log($rootScope)
 
     $(function() {
     	$scope.test = function(){

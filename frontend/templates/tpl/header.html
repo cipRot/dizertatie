@@ -31,9 +31,9 @@
                     <span class="username username-hide-mobile">{{header_user}} <i class="fa fa-angle-down"></i></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-default option-menu">
-                    <li>
-                        <a href="#/profile">
-                            <i class="icon-user"></i>Profile
+                    <li ng-if="header_user_type=== 'admin'">
+                        <a href="#/create">
+                            <i class="icon-user"></i>Create users
                         </a>
                     </li>
                     <li class="last-item">

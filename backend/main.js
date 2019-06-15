@@ -6,7 +6,7 @@ const removeAccents = require('remove-accents');
 // const PDFParser = require("pdf2json");
 const pdf = require('pdf-parse');
 const bodyParser = require('body-parser')
-const client = require('@draftable/compare-api').client("VjsyYq-test", "cbd0477e2b159799b250663fb422a1b7");
+const client = require('@draftable/compare-api').client("-test", "");
 const comparisons = client.comparisons;
  
 var busboy = require('connect-busboy');
@@ -36,14 +36,36 @@ app.use(bodyParser.json())
  
 
 
-mongoose.connect('mongodb://admin:admin@ds235328.mlab.com:35328/cheat', function (err, db) {
+mongoose.connect('', function (err, db) {
  
    if (err) throw err;
  
-    console.log('Successfully connected'); 
-    // const filesavesSchema = new mongoose.Schema({ title: 'string', content: 'string' });
+    console.log('Successfully connected');  
+
     const filesavesSchema = new mongoose.Schema({ title: 'string'});
 	const filesaves = db.model('filesaves', filesavesSchema);   
+
+
+	const usersSchema = new mongoose.Schema({ username: 'string',password: 'string',type: 'string'});
+	const users = db.model('users', usersSchema); 
+
+	app.post('/login', function (req, res) { 
+	  	let user = new users({ username: req.body.username,  password: req.body.password});
+	    users.findOne({ username: req.body.username,  password: req.body.password}, (err, resp) => {  
+	    	console.log(err, resp)
+		    if (err) return res.status(500).send({user, msg: "Error", status:500}); 
+		    if (!resp) return res.status(200).send({user, msg: "No user found!", status:200}); 
+		    return res.status(200).send({data: resp, msg: "User found!", status:200});
+		});
+	});
+
+	app.post('/addUser', function (req, res) { 
+	  	let user = new users({ username: req.body.username,  password: req.body.password, type: req.body.type});
+	    user.save(err => {  
+		    if (err) return res.status(500).send({user, msg: "Error", status:500}); 
+		    return res.status(200).send({user, msg: "User created", status:200});
+		}); 
+	});
 
 
 	app.get('/compareApi', function (req, res) {
@@ -69,7 +91,6 @@ mongoose.connect('mongodb://admin:admin@ds235328.mlab.com:35328/cheat', function
 	});
 
 	app.post('/compareTwoFilesApi', function (req, res) {
-		 
 		var fstream; 
 		var paths = [];
 	    req.pipe(req.busboy);
@@ -111,10 +132,6 @@ mongoose.connect('mongodb://admin:admin@ds235328.mlab.com:35328/cheat', function
  	})
 
  	app.post('/compareLocalFiles', function (req, res) {
-		 console.log(req.body); 
-		 console.log(__dirname + '/files/' + removeAccents(req.body.one))
- 		console.log(__dirname + '/files/' + removeAccents(req.body.two))
- 
 		if(req.body.one && req.body.two){
 			comparisons.create({
 		        left: {
@@ -136,9 +153,8 @@ mongoose.connect('mongodb://admin:admin@ds235328.mlab.com:35328/cheat', function
 		       })
 		    });
 		}
-	    				 
-    	     
  	})
+
 
 	app.get('/getAllDocuments', function (req, res) {
 	  filesaves.find({}, function(err, text) {
@@ -146,24 +162,16 @@ mongoose.connect('mongodb://admin:admin@ds235328.mlab.com:35328/cheat', function
 	  })
 	});
 
+
  	app.post('/readPDF', function(req, res) {
 	    var fstream; 
 	    req.pipe(req.busboy);
 	    req.busboy.on('file', function (fieldname, file, filename) { 
 	        fstream = fs.createWriteStream(__dirname + '/files/' + removeAccents(filename));
 	        file.pipe(fstream); 
-	        fstream.on('close', function () { 
-			    // pdfParser.on("pdfParser_dataError", errData => console.log(errData.parserError) );
-			    // pdfParser.on("pdfParser_dataReady", pdfData => { 
-			    // 	let text = removeAccents(pdfParser.getRawTextContent());
-				   //  res.send(text)                               	       
-			    // }); 
-
-			    // pdfParser.loadPDF(fstream.path);
-
+	        fstream.on('close', function () {  
 			    let dataBuffer = fs.readFileSync(fstream.path);
-				pdf(dataBuffer).then(function(data) {
-					console.log(data);	
+				pdf(dataBuffer).then(function(data) { 
 					let context =  removeAccents(data.text); 
 				  	res.send(context)  
 				});
@@ -180,9 +188,7 @@ mongoose.connect('mongodb://admin:admin@ds235328.mlab.com:35328/cheat', function
 	        file.pipe(fstream); 
 	        fstream.on('close', function () { 
     			let dataBuffer = fs.readFileSync(fstream.path);
-				pdf(dataBuffer).then(function(data) {
-				  	//let context =  removeAccents(data.text); 
-				    // let doc = new filesaves({ title: filename, content: context });
+				pdf(dataBuffer).then(function(data) { 
 			        let doc = new filesaves({ title: filename });
 			        doc.save(err => {  
 					    if (err) return res.status(500).send(err); 
@@ -193,8 +199,6 @@ mongoose.connect('mongodb://admin:admin@ds235328.mlab.com:35328/cheat', function
 	        });
 	    });
 	});
-
- 
 });
  
 app.listen(3000);

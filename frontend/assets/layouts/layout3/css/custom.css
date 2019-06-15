@@ -219,9 +219,10 @@ div#loginBox > form {
     height: 67px;
 }
 
-.login_form  div#lower > button[type="submit"] {
+.login_form  div#lower > button,
+.login_form  div#lower > a {
     cursor: pointer; 
-    margin: 18px 18px 0 0;
+    margin: 18px 18px;
     float: right;
     
 }
